@@ -46,7 +46,10 @@ class ChatGpt extends LLM {
         openAIMessages.insert(
           0,
           OpenAIChatCompletionChoiceMessageModel(
-            content: message.text,
+            content: [
+              OpenAIChatCompletionChoiceMessageContentItemModel.text(
+                  message.text)
+            ],
             role: message.role.asOpenAIChatMessageRole,
           ),
         );
@@ -61,9 +64,11 @@ class ChatGpt extends LLM {
           .createStream(model: currentModel, messages: openAIMessages);
       chatStream.listen(
         (chatStreamEvent) async {
-          if (chatStreamEvent.choices.first.delta.content != null) {
-            message.text =
-                message.text + chatStreamEvent.choices.first.delta.content!;
+          if (chatStreamEvent.choices.first.delta.content?.first?.text !=
+              null) {
+            message.text = message.text +
+                (chatStreamEvent.choices.first.delta.content?.first?.text ??
+                    '');
             try {
               var hasVibration = await Vibration.hasVibrator();
               if (hasVibration != null && hasVibration) {
@@ -90,7 +95,7 @@ class ChatGpt extends LLM {
           model: currentModel,
           messages: openAIMessages,
         );
-        message.text = response.choices.first.message.content;
+        message.text = response.choices.first.message.content?.first.text ?? '';
         onSuccess(message);
       } catch (e) {
         message.text = e.toString();

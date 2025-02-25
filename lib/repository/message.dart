@@ -1,7 +1,6 @@
 import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_chatgpt/controller/settings.dart';
-import 'package:flutter_chatgpt/data/glm.dart';
 import 'package:flutter_chatgpt/data/if.dart';
 import 'package:flutter_chatgpt/data/llm.dart';
 import 'package:flutter_chatgpt/data/you.dart';
@@ -28,8 +27,8 @@ class MessageRepository {
 
   void init() {
     OpenAI.apiKey = GetStorage().read('openAiKey') ?? "sk-xx";
-    OpenAI.baseUrl =
-        GetStorage().read('openAiBaseUrl') ?? "https://api.openai.com";
+    OpenAI.baseUrl = GetStorage().read('openAiBaseUrl') ??
+        "https://api.hunyuan.cloud.tencent.com";
   }
 
   void _getResponseFromGpt(

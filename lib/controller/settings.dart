@@ -9,7 +9,7 @@ class SettingsController extends GetxController {
   final openAiKey = "".obs;
   final youCode = "".obs;
 
-  final openAiBaseUrl = "https://api.openai-proxy.com".obs;
+  final openAiBaseUrl = "https://api.hunyuan.cloud.tencent.com".obs;
 
   final themeMode = ThemeMode.system.obs;
 
@@ -80,7 +80,7 @@ class SettingsController extends GetxController {
 
   getOpenAiBaseUrlFromPreferences() async {
     GetStorage _box = GetStorage();
-    String baseUrl = _box.read('openAiBaseUrl') ?? "https://ai.fakeopen.com";
+    String baseUrl = _box.read('openAiBaseUrl') ?? "https://api.hunyuan.cloud.tencent.com";
     setOpenAiBaseUrl(baseUrl);
   }
 

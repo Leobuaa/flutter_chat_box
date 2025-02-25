@@ -107,7 +107,7 @@ class SettingPage extends GetResponsiveView<SettingsController> {
                 ),
                 filled: true,
               ),
-              items: <String>['OpenAI']
+              items: ['OpenAI', 'HunYuan']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -154,7 +154,7 @@ class SettingPage extends GetResponsiveView<SettingsController> {
             const SizedBox(
               height: 20,
             ),
-            controller.llm.value == "OpenAI"
+            showSetting()
                 ? TextFormField(
                     initialValue: controller.openAiKey.value,
                     decoration: InputDecoration(
@@ -196,12 +196,12 @@ class SettingPage extends GetResponsiveView<SettingsController> {
                     obscureText: controller.isObscure.value,
                   )
                 : const SizedBox(),
-            controller.llm.value == "OpenAI"
+            showSetting()
                 ? const SizedBox(
                     height: 20,
                   )
                 : const SizedBox(),
-            controller.llm.value == "OpenAI" || controller.llm.value == "You"
+            showSetting()
                 ? DropdownButtonFormField(
                     value: controller.openAiBaseUrl.value,
                     isExpanded: true,
@@ -221,9 +221,8 @@ class SettingPage extends GetResponsiveView<SettingsController> {
                       filled: true,
                     ),
                     items: <String>[
-                      'https://api.openai-proxy.com',
-                      'https://api.openai.com',
-                      'https://api.wgpt.in'
+                      'https://models.inference.ai.azure.com',
+                      'https://api.hunyuan.cloud.tencent.com',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -239,12 +238,12 @@ class SettingPage extends GetResponsiveView<SettingsController> {
                     },
                   )
                 : const SizedBox(),
-            controller.llm.value == "OpenAI" || controller.llm.value == "You"
+            showSetting()
                 ? const SizedBox(
                     height: 20,
                   )
                 : const SizedBox(),
-            controller.llm.value == "OpenAI" || controller.llm.value == "You"
+            showSetting()
                 ? DropdownButtonFormField(
                     value: controller.gptModel.value,
                     isExpanded: true,
@@ -264,10 +263,8 @@ class SettingPage extends GetResponsiveView<SettingsController> {
                       filled: true,
                     ),
                     items: <String>[
-                      'gpt-3.5-turbo',
-                      'gpt-3.5-turbo-16k',
-                      'gpt-4',
-                      'gpt-4-0314',
+                      'gpt-4o',
+                      'hunyuan-turbo',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -283,5 +280,10 @@ class SettingPage extends GetResponsiveView<SettingsController> {
         );
       }),
     );
+  }
+
+  bool showSetting() {
+    return controller.llm.value == "OpenAI" ||
+        controller.llm.value == "HunYuan";
   }
 }
