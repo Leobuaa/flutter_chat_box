@@ -80,7 +80,8 @@ class SettingsController extends GetxController {
 
   getOpenAiBaseUrlFromPreferences() async {
     GetStorage _box = GetStorage();
-    String baseUrl = _box.read('openAiBaseUrl') ?? "https://api.hunyuan.cloud.tencent.com";
+    String baseUrl =
+        _box.read('openAiBaseUrl') ?? "https://api.hunyuan.cloud.tencent.com";
     setOpenAiBaseUrl(baseUrl);
   }
 
@@ -92,7 +93,7 @@ class SettingsController extends GetxController {
 
   getGptModelFromPreferences() async {
     GetStorage _box = GetStorage();
-    String model = _box.read('gptModel') ?? "gpt-3.5-turbo";
+    String model = _box.read('gptModel') ?? "hunyuan-turbo";
     setGptModel(model);
   }
 
